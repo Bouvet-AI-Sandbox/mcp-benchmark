@@ -17,7 +17,14 @@
     // "forwardPorts": [],
 
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "pip install --no-cache-dir jupyter jupyterlab mcp[cli]"
+    "postCreateCommand": "pip install --no-cache-dir jupyter jupyterlab mcp[cli]",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-toolsai.jupyter"
+            ]
+        }
+    }
 
     // Configure tool-specific properties.
     // "customizations": {},
