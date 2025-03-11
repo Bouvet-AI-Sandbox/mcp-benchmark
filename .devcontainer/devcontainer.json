@@ -17,7 +17,7 @@
     // "forwardPorts": [],
 
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "pip install --no-cache-dir jupyter jupyterlab mcp[cli]",
+    "postCreateCommand": "pip install --no-cache-dir jupyter jupyterlab mcp[cli] pandas fastparquet huggingface_hub",
     "customizations": {
         "vscode": {
             "extensions": [
