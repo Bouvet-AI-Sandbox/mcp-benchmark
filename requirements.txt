@@ -1,4 +1,10 @@
 langgraph==0.2.56 
 langchain-community==0.3.9 
 langchain-openai==0.2.11 
+langchain-anthropic
+langchain-mistralai
+langchain-google-genai
+langchain-together
+langchain-fireworks
+langchain-ollama
 promptquality==0.72.1
