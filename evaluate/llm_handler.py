@@ -8,6 +8,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_together import ChatTogether
 from langchain_openai import ChatOpenAI
 from langchain_fireworks import ChatFireworks
+from langchain_ollama import ChatOllama
 
 
 class LLMHandler:
@@ -17,40 +18,46 @@ class LLMHandler:
 
     def __init__(self):
         self.available_models = {
-            "anthropic": ["claude-3-5-sonnet-20241022", "claude-3-5-haiku-20241022"],
-            "mistral": [
-                "open-mistral-nemo-2407",
-                "ministral-8b-2410",
-                "mistral-small-2409",
-                "mistral-large-2411",
-                "mistral-small-2501",
+            "ollama": [
+                "llama3.2:3b",
+                "mistral:7b"
             ],
-            "google": [
-                "gemini-2.0-flash-exp",
-                "gemini-1.5-flash",
-                "gemini-1.5-pro",
-                "gemini-2.0-flash-001",
-            ],
-            "together": [
-                "meta-llama/Llama-3.3-70B-Instruct-Turbo",
-                "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
-                "deepseek-ai/DeepSeek-R1",
-                "deepseek-ai/DeepSeek-V3",
-            ],
-            "openai": [
-                "gpt-4o-2024-11-20",
-                "gpt-4o-mini",
-                "o1-2024-12-17",
-                "o3-mini-2025-01-31",
-            ],
-            "fireworks": [
-                "accounts/fireworks/models/qwen-qwq-32b-preview",
-                "accounts/fireworks/models/qwen2p5-72b-instruct",
-                "accounts/fireworks/models/deepseek-v3",
-                "accounts/fireworks/models/deepseek-r1",
-            ],
+            # "anthropic": ["claude-3-5-sonnet-20241022", "claude-3-5-haiku-20241022"],
+            # "mistral": [
+            #     "open-mistral-nemo-2407",
+            #     "ministral-8b-2410",
+            #     "mistral-small-2409",
+            #     "mistral-large-2411",
+            #     "mistral-small-2501",
+            # ],
+            # "google": [
+            #     "gemini-2.0-flash-exp",
+            #     "gemini-1.5-flash",
+            #     "gemini-1.5-pro",
+            #     "gemini-2.0-flash-001",
+            # ],
+            # "together": [
+            #     "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+            #     "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+            #     "deepseek-ai/DeepSeek-R1",
+            #     "deepseek-ai/DeepSeek-V3",
+            # ],
+            # "openai": [
+            #     "gpt-4o-2024-11-20",
+            #     "gpt-4o-mini",
+            #     "o1-2024-12-17",
+            #     "o3-mini-2025-01-31",
+            # ],
+            # "fireworks": [
+            #     "accounts/fireworks/models/qwen-qwq-32b-preview",
+            #     "accounts/fireworks/models/qwen2p5-72b-instruct",
+            #     "accounts/fireworks/models/deepseek-v3",
+            #     "accounts/fireworks/models/deepseek-r1",
+            # ],
         }
         self.model_types = {
+            "llama3.2:3b": "open-source",
+            "mistral:7b": "open-source",
             "claude-3-5-sonnet-20241022": "private",
             "claude-3-5-haiku-20241022": "private",
             "open-mistral-nemo-2407": "open-source",
@@ -82,7 +89,7 @@ class LLMHandler:
             "ministral": "mistral",
             "gemini": "google",
             "mixtral": "together",
-            "llama": "together",
+            "llama": "ollama",
             "fireworks": "fireworks",
             "r1": "together",
             "deepseek-v3": "together",
@@ -191,3 +198,7 @@ class LLMHandler:
         elif provider == "fireworks":
             print("Using Fireworks")
             return ChatFireworks(model=model_name, **model_params)
+        
+        elif provider == "ollama":
+            print("Using Ollama")
+            return ChatOllama(model="llama3.1:8b-instruct-q8_0", base_url="http://host.docker.internal:11434/v1",**model_params)
